@@ -4,7 +4,8 @@ test_deps = [
     "pytest",
     "pytest-pylint",
     "pytest-cov",
-    "requests"
+    "requests",
+    "bs4"
 ]
 
 setup(
@@ -16,6 +17,7 @@ setup(
     # Add here the package dependencies
     install_requires=[
         'pandas',
-        'requests'
+        'requests',
+        'bs4'
     ],
 )
