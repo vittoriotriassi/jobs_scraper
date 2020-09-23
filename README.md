@@ -1,4 +1,4 @@
-# jobs_scraper
+# jobs_scraper (WIP)
 
 [![Build Status](https://travis-ci.com/vittoriotriassi/jobs-scraper.svg?token=ipQz6La2kUNRkwsqbQXy&branch=master)](https://travis-ci.com/vittoriotriassi/jobs-scraper)
 
