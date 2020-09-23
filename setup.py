@@ -16,5 +16,6 @@ setup(
     # Add here the package dependencies
     install_requires=[
         'pandas',
+        'requests'
     ],
 )
