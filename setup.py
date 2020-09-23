@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 test_deps = [
     "pytest",
     "pytest-pylint",
-    "pytest-cov"
+    "pytest-cov",
+    "requests"
 ]
 
 setup(
