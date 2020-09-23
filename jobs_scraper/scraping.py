@@ -42,15 +42,15 @@ class JobsScraper:
             try:
                 title = job.find('a', class_ = 'jobtitle').text.strip().replace('\n', '')
             except:
-                title = ''
+                title = None
             try:
                 company = job.find('span', class_ = 'company').text.strip().replace('\n', '')
             except:
-                company = ''
+                company = None
             try:
                 summary = job.find('div', {'class':'summary'}).text.strip().replace('\n', '')
             except:
-                summary = ''
+                summary = None
             try:
                 location = job.find('span', class_ = 'location').text.strip().replace('\n', '')
             except:
@@ -71,7 +71,7 @@ class JobsScraper:
 
             self._jobs.append(job)
 
-    def scrape(self):
+    def scrape(self) -> pd.DataFrame:
         """
         Perform the scraping of the url provided in the class constructor.
         If duplicates are found, they get dropped.
