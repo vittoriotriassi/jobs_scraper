@@ -8,6 +8,10 @@ test_deps = [
     "bs4"
 ]
 
+extras = {
+    'test': test_deps,
+}
+
 setup(
     name='jobs_scraper',
     version='1.0',
@@ -20,4 +24,5 @@ setup(
         'requests',
         'bs4'
     ],
+    extras_require=extras,
 )
