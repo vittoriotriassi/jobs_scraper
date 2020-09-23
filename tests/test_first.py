@@ -1,4 +1,4 @@
 """First test"""
 
-def test_first(self):
+def test_first():
     print("Test run")
