@@ -64,7 +64,6 @@ class JobsScraper:
                 'company': company,
                 'summary': summary,
                 'salary': salary
-                
             }
 
             self._jobs.append(job)

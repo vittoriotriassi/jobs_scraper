@@ -5,7 +5,8 @@ test_deps = [
     "pytest-pylint",
     "pytest-cov",
     "requests",
-    "bs4"
+    "bs4",
+    "fake_useragent"
 ]
 
 extras = {
