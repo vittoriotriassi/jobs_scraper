@@ -4,15 +4,12 @@ from bs4 import BeautifulSoup
 
 class JobsScraper:
     """JobsScraper is a simple job postings scraper for Indeed."""
-    def __init__(self, headers: dict, url: str, pages: int):
+    def __init__(self, url: str, pages: int):
         """
         Create a JobsScraper object.
 
         Parameters
         ------------
-        headers: dict
-            Dictionary that represents the user agent:
-            {'User-Agent': '_user_agent_here_'}
         url: str
             Url to be scraped.
             Please provide the general query from the Indeed homepage.
@@ -20,15 +17,13 @@ class JobsScraper:
             Number of pages to be scraped.
             Each page contains 15 results.
         """
-        self._headers = requests.utils.default_headers()
-        self._headers.update(headers)
         self._url = url
         self._pages = pages
         self._jobs = []
         
     def _extract_page(self, page):
 
-        r = requests.get("{}&start={}".format(self._url, page), self._headers)
+        r = requests.get("{}&start={}".format(self._url, page))
         soup = BeautifulSoup(r.content, 'html.parser')
 
         return soup
