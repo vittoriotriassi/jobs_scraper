@@ -3,10 +3,7 @@ from setuptools import setup, find_packages
 test_deps = [
     "pytest",
     "pytest-pylint",
-    "pytest-cov",
-    "requests",
-    "bs4",
-    "fake_useragent"
+    "pytest-cov"
 ]
 
 extras = {
