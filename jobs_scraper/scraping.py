@@ -49,10 +49,17 @@ class JobsScraper:
                 summary = job.find('div', {'class':'summary'}).text.strip().replace('\n', '')
             except:
                 summary = None
-            try:
-                location = job.find('span', class_ = 'location').text.strip().replace('\n', '')
-            except:
-                location = None
+
+            if job.find('div', class_ = 'location'):
+                try:
+                    location = job.find('div', class_ = 'location').text.strip().replace('\n', '')
+                except:
+                    location = None
+            else:
+                try:
+                    location = job.find('span', class_ = 'location').text.strip().replace('\n', '')
+                except:
+                    location = None
             try:
                 salary = job.find('span', class_ = 'salary').text.strip().replace('\n', '')
             except:
@@ -88,3 +95,7 @@ class JobsScraper:
         df.drop_duplicates(inplace=True)
 
         return df
+
+scraper = JobsScraper(url='https://it.indeed.com/jobs?q=software+engineer&l=Milano%2C+Lombardia', pages=2)
+df = scraper.scrape()
+print(df)
