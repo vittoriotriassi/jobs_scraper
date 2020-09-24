@@ -95,7 +95,3 @@ class JobsScraper:
         df.drop_duplicates(inplace=True)
 
         return df
-
-scraper = JobsScraper(url='https://it.indeed.com/jobs?q=software+engineer&l=Milano%2C+Lombardia', pages=2)
-df = scraper.scrape()
-print(df)
