@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
 
 class JobsScraper:
     """JobsScraper is a simple job postings scraper for Indeed."""
@@ -18,12 +19,14 @@ class JobsScraper:
             Each page contains 15 results.
         """
         self._url = url
+        self._ua = UserAgent()
+        self._headers = {'User-Agent': self._ua.random}
         self._pages = pages
         self._jobs = []
         
     def _extract_page(self, page):
 
-        r = requests.get("{}&start={}".format(self._url, page))
+        r = requests.get("{}&start={}".format(self._url, page), headers = self._headers)
         soup = BeautifulSoup(r.content, 'html.parser')
 
         return soup
