@@ -22,7 +22,8 @@ setup(
     install_requires=[
         'pandas',
         'requests',
-        'bs4'
+        'bs4',
+        'fake_useragent'
     ],
     extras_require=extras,
 )
