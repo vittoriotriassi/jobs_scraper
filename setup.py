@@ -25,7 +25,8 @@ setup(
         'requests',
         'bs4',
         'fake_useragent',
-        'tqdm'
+        'tqdm',
+        'lxml'
     ],
     extras_require=extras,
 )
