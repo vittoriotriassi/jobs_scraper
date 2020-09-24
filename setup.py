@@ -24,7 +24,8 @@ setup(
         'pandas',
         'requests',
         'bs4',
-        'fake_useragent'
+        'fake_useragent',
+        'tqdm'
     ],
     extras_require=extras,
 )
