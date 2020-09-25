@@ -10,7 +10,7 @@ from tqdm import tqdm
 class JobsScraper:
     """JobsScraper is a simple job postings scraper for Indeed."""
 
-    def __init__(self, url: str, pages: int, max_delay = 1):
+    def __init__(self, url: str, pages: int, max_delay = 0):
         """
         Create a JobsScraper object.
 
@@ -21,7 +21,7 @@ class JobsScraper:
             Please provide the general query from the Indeed homepage.
         pages: int
             Number of pages to be scraped. Each page contains 15 results.
-        max_delay = 1 (Optional)
+        max_delay: int, default=0
             Max number of seconds of delay for the scraping of a single posting.
         """
         self._url = url
@@ -109,10 +109,8 @@ class JobsScraper:
 
             print("Scraping {}...".format(title))
 
-            if self._max_delay > 1:
-                sleep(random.randint(1, self._max_delay))
-            else:
-                sleep(1)
+            if self._max_delay > 0:
+                sleep(random.randint(0, self._max_delay))
             
             
 
