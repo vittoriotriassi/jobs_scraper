@@ -5,26 +5,35 @@ import random
 from bs4 import BeautifulSoup
 from itertools import cycle
 from fake_useragent import UserAgent
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
 class JobsScraper:
     """JobsScraper is a simple job postings scraper for Indeed."""
 
-    def __init__(self, url: str, pages: int, max_delay = 0):
+    def __init__(self, country: str, position: str, location: str, pages: int, max_delay: int = 0):
         """
         Create a JobsScraper object.
 
         Parameters
         ------------
-        url: str
-            Url to be scraped.
-            Please provide the general query from the Indeed homepage.
+        country: str
+            Prefix country. 
+            Available countries:
+            AE, AQ, AR, AT, AU, BE, BH, BR, CA, CH, CL, CO,
+            CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, 
+            IL, IN, IT, KW, LU, MX, MY, NL, NO, NZ, OM, PE, 
+            PH, PK, PL, PT, QA, RO, RU, SA, SE, SG, TR, TW, 
+            US, VE, ZA.
+        position: str
+            Job position.
+        location: str
+            Job location.
         pages: int
             Number of pages to be scraped. Each page contains 15 results.
         max_delay: int, default=0
             Max number of seconds of delay for the scraping of a single posting.
         """
-        self._url = url
+        self._url = 'https://{}.indeed.com/jobs?q={}&l={}'.format(country, position, location)
         self._ua = UserAgent()
         self._headers = {'User-Agent': self._ua.random}
         self._pages = pages
