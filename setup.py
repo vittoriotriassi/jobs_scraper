@@ -23,7 +23,7 @@ setup(
         'bs4',
         'fake_useragent',
         'tqdm',
-        'lxml'
+        'lxml',
     ],
     extras_require=extras,
 )
