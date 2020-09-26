@@ -22,6 +22,7 @@ setup(
     version='0.0.1',
     description="A simple job postings scraper for Indeed.",
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     url='https://github.com/vittoriotriassi/jobs_scraper',
     author='Vittorio Triassi',
     author_email='vi.triassi@gmail.com',
