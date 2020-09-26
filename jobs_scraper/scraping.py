@@ -10,7 +10,7 @@ from tqdm.auto import tqdm
 class JobsScraper:
     """JobsScraper is a simple job postings scraper for Indeed."""
 
-    def __init__(self, country: str, position: str, location: str, pages: int, max_delay: int = 0):
+    def __init__(self, country: str, position: str, location: str, pages: int, max_delay: int = 0, full_urls: bool = False):
         """
         Create a JobsScraper object.
 
@@ -30,16 +30,24 @@ class JobsScraper:
             Job location.
         pages: int
             Number of pages to be scraped. Each page contains 15 results.
-        max_delay: int, default=0
+        max_delay: int, default = 0
             Max number of seconds of delay for the scraping of a single posting.
+        full_urls: bool, default = False
+            If set to True, it shows the job url column not truncated in the DataFrame.
         """
         self._url = 'https://{}.indeed.com/jobs?q={}&l={}'.format(country, position, location)
+        self._country = country
         self._ua = UserAgent()
         self._headers = {'User-Agent': self._ua.random}
         self._pages = pages
         self._proxy = []
         self._max_delay = max_delay
         self._jobs = []
+        
+        if full_urls:
+            pd.set_option('display.max_colwidth', None)
+        else:
+            pd.reset_option('display.max_colwidth')
 
     def _proxies(self):
 
@@ -101,6 +109,11 @@ class JobsScraper:
                 except:
                     location = None
             try:
+                href = job.h2.a.get('href')
+                job_url = 'https://{}.indeed.com{}'.format(self._country, href)
+            except:
+                job_url = None
+            try:
                 salary = job.find(
                     'span', class_='salary').text.strip().replace('\n', '')
             except:
@@ -111,7 +124,8 @@ class JobsScraper:
                 'location': location,
                 'company': company,
                 'summary': summary,
-                'salary': salary
+                'salary': salary,
+                'url': job_url
             }
 
             self._jobs.append(job)
@@ -120,7 +134,6 @@ class JobsScraper:
 
             if self._max_delay > 0:
                 sleep(random.randint(0, self._max_delay))
-            
             
 
     def scrape(self) -> pd.DataFrame:
