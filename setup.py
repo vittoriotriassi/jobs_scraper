@@ -19,7 +19,7 @@ classifiers = [
 
 setup(
     name='jobs_scraper',
-    version='0.0.2',
+    version='0.0.3',
     description="A simple job postings scraper for Indeed.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
