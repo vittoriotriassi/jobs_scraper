@@ -4,3 +4,5 @@ __pycache__
 __pycache__/*
 htmlcov
 .ipynb_checkpoints
+*.egg-info
+dist
