@@ -1,6 +1,7 @@
-# jobs_scraper (WIP)
+# jobs_scraper
 
 [![Build Status](https://travis-ci.com/vittoriotriassi/jobs_scraper.svg?branch=master)](https://travis-ci.com/vittoriotriassi/jobs_scraper)
+![PyPI](https://img.shields.io/pypi/v/jobs_scraper?color=informational&label=PyPI)
 
 jobs_scraper is a simple job postings scraper for the website [Indeed](https://www.indeed.com), it is written in Python and is based on the ```requests``` and ```BeautifulSoup``` libraries.
 
