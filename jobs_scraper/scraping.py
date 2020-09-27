@@ -49,6 +49,7 @@ class JobsScraper:
         else:
             pd.reset_option('display.max_colwidth')
 
+
     def _proxies(self):
 
         url = 'https://www.sslproxies.org/'
@@ -62,6 +63,7 @@ class JobsScraper:
         proxies_pool = df[0]['IP_Port'].tolist()
         self._proxy = cycle(proxies_pool)
 
+
     def _extract_page(self, page):
 
         current_proxy = next(self._proxy)
@@ -73,6 +75,7 @@ class JobsScraper:
         soup = BeautifulSoup(r.content, 'html.parser')
 
         return soup
+
 
     def _transform_page(self, soup):
 
@@ -138,7 +141,7 @@ class JobsScraper:
 
     def scrape(self) -> pd.DataFrame:
         """
-        Perform the scraping of the url provided in the class constructor.
+        Perform the scraping for the parameters provided in the class constructor.
         If duplicates are found, they get dropped.
 
         Returns
