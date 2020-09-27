@@ -19,8 +19,8 @@ classifiers = [
 
 setup(
     name='jobs_scraper',
-    version='0.0.3',
-    description="A simple job postings scraper for Indeed.",
+    version='0.0.4',
+    description="A simple job postings scraper for Indeed based on requests and BeautifulSoup.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/vittoriotriassi/jobs_scraper',
