@@ -20,7 +20,7 @@ To use jobs_scraper you need to create a new JobsScraper object and provide the 
 - ```pages```: number of pages to be scraped.
 
 ```python
-from jobs_scraper.scraping import JobsScraper
+from jobs_scraper import JobsScraper
 
 # Let's create a new JobsScraper object and perform the scraping for a given query.
 scraper = JobsScraper(country="nl", position="Data Engineer", location="Amsterdam", pages=3)
