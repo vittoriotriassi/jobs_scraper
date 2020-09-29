@@ -42,3 +42,6 @@ By setting ```max_delay``` in the constructor, every job posting will be randoml
   ```python
   scraper = JobsScraper(country="...", position="...", location="...", pages=..., full_urls=True)
   ```
+  
+## TODO
+- Add rotating proxies to prevent the scraper from being blocked once too many requests are sent.
