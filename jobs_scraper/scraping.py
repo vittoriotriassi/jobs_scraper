@@ -3,7 +3,6 @@ import pandas as pd
 from time import sleep
 import random
 from bs4 import BeautifulSoup
-from itertools import cycle
 from fake_useragent import UserAgent
 from tqdm.auto import tqdm
 
@@ -40,7 +39,6 @@ class JobsScraper:
         self._ua = UserAgent()
         self._headers = {'User-Agent': self._ua.random}
         self._pages = pages
-        self._proxy = []
         self._max_delay = max_delay
         self._jobs = []
         
@@ -50,27 +48,10 @@ class JobsScraper:
             pd.reset_option('display.max_colwidth')
 
 
-    def _proxies(self):
-
-        url = 'https://www.sslproxies.org/'
-
-        r = requests.get(url, headers=self._headers)
-
-        df = pd.read_html(r.text)
-        df[0].dropna(inplace=True)
-        df[0]['Port'] = df[0]['Port'].astype(int).astype(str)
-        df[0]['IP_Port'] = df[0]['IP Address'].str.cat(df[0]['Port'], sep=":")
-        proxies_pool = df[0]['IP_Port'].tolist()
-        self._proxy = cycle(proxies_pool)
-
-
     def _extract_page(self, page):
 
-        current_proxy = next(self._proxy)
-
         with requests.Session() as request:
-            r = request.get(url="{}&start={}".format(self._url, page), proxies={
-                            "http://": current_proxy, "https://": current_proxy}, headers=self._headers, timeout=30)
+            r = request.get(url="{}&start={}".format(self._url, page), headers=self._headers)
 
         soup = BeautifulSoup(r.content, 'html.parser')
 
@@ -149,8 +130,6 @@ class JobsScraper:
         df: pd.DataFrame
             Return a scraped Dataframe.
         """
-
-        self._proxies()
 
         for i in tqdm(range(0, self._pages * 10, 10), desc = "Scraping in progress...", total = self._pages):
 
