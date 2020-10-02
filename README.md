@@ -4,7 +4,7 @@
 ![PyPI](https://img.shields.io/pypi/v/jobs_scraper?color=brightgreen&label=pypi%20package)
 [![Downloads](https://pepy.tech/badge/jobs-scraper)](https://pepy.tech/project/jobs-scraper)
 
-jobs_scraper is a simple job postings scraper for the website [Indeed](https://www.indeed.com), it is written in Python and is based on the ```requests``` and ```BeautifulSoup``` libraries.
+```jobs_scraper``` is a simple job postings scraper for the website [Indeed](https://www.indeed.com), it is written in Python and is based on the ```requests``` and ```BeautifulSoup``` libraries.
 
 ## Installation
 
