@@ -3,7 +3,6 @@ import pandas as pd
 from time import sleep
 import random
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from tqdm.auto import tqdm
 
 class JobsScraper:
@@ -36,8 +35,7 @@ class JobsScraper:
         """
         self._url = 'https://{}.indeed.com/jobs?q={}&l={}'.format(country, position, location)
         self._country = country
-        self._ua = UserAgent()
-        self._headers = {'User-Agent': self._ua.random}
+        self._headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
         self._pages = pages
         self._max_delay = max_delay
         self._jobs = []
