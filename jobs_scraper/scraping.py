@@ -33,7 +33,10 @@ class JobsScraper:
         full_urls: bool, default = False
             If set to True, it shows the job url column not truncated in the DataFrame.
         """
-        self._url = 'https://{}.indeed.com/jobs?q={}&l={}'.format(country, position, location)
+        if country.upper() == "US":
+            self._url = 'https://indeed.com/jobs?q={}&l={}'.format(position, location)
+        else:
+            self._url = 'https://{}.indeed.com/jobs?q={}&l={}'.format(country, position, location)
         self._country = country
         self._headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
         self._pages = pages
@@ -92,7 +95,10 @@ class JobsScraper:
                     location = None
             try:
                 href = job.h2.a.get('href')
-                job_url = 'https://{}.indeed.com{}'.format(self._country, href)
+                if self._country.upper() == "US":
+                    job_url = 'https://indeed.com{}'.format(href)
+                else:
+                    job_url = 'https://{}.indeed.com{}'.format(self._country, href)
             except:
                 job_url = None
             try:
