@@ -15,12 +15,12 @@ class JobsScraper:
         Parameters
         ------------
         country: str
-            Prefix country. 
+            Prefix country.
             Available countries:
             AE, AQ, AR, AT, AU, BE, BH, BR, CA, CH, CL, CO,
-            CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, 
-            IL, IN, IT, KW, LU, MX, MY, NL, NO, NZ, OM, PE, 
-            PH, PK, PL, PT, QA, RO, RU, SA, SE, SG, TR, TW, 
+            CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE,
+            IL, IN, IT, KW, LU, MX, MY, NL, NO, NZ, OM, PE,
+            PH, PK, PL, PT, QA, RO, RU, SA, SE, SG, TR, TW,
             US, VE, ZA.
         position: str
             Job position.
@@ -42,7 +42,7 @@ class JobsScraper:
         self._pages = pages
         self._max_delay = max_delay
         self._jobs = []
-        
+
         if full_urls:
             pd.set_option('display.max_colwidth', None)
         else:
@@ -61,30 +61,30 @@ class JobsScraper:
 
     def _transform_page(self, soup):
 
-        jobs = soup.find_all('div', class_='jobsearch-SerpJobCard')
+        jobs = soup.find_all('div', class_='job_seen_beacon')
 
         for job in jobs:
 
             try:
                 title = job.find(
-                    'a', class_='jobtitle').text.strip().replace('\n', '')
+                    'h2', class_='jobTitle').text.strip().replace('\n', '')
             except:
                 title = None
             try:
                 company = job.find(
-                    'span', class_='company').text.strip().replace('\n', '')
+                    'span', class_='companyName').text.strip().replace('\n', '')
             except:
                 company = None
             try:
                 summary = job.find(
-                    'div', {'class': 'summary'}).text.strip().replace('\n', '')
+                    'div', {'class': 'job-snippet'}).text.strip().replace('\n', '')
             except:
                 summary = None
 
-            if job.find('div', class_='location'):
+            if job.find('div', class_='companyLocation'):
                 try:
                     location = job.find(
-                        'div', class_='location').text.strip().replace('\n', '')
+                        'div', class_='companyLocation').text.strip().replace('\n', '')
                 except:
                     location = None
             else:
@@ -94,7 +94,7 @@ class JobsScraper:
                 except:
                     location = None
             try:
-                href = job.h2.a.get('href')
+                href = job.parent.a.get('href')
                 if self._country.upper() == "US":
                     job_url = 'https://indeed.com{}'.format(href)
                 else:
@@ -103,7 +103,7 @@ class JobsScraper:
                 job_url = None
             try:
                 salary = job.find(
-                    'span', class_='salary').text.strip().replace('\n', '')
+                    'span', class_='salary-snippet').text.strip().replace('\n', '')
             except:
                 salary = None
 
@@ -122,7 +122,7 @@ class JobsScraper:
 
             if self._max_delay > 0:
                 sleep(random.randint(0, self._max_delay))
-            
+
 
     def scrape(self) -> pd.DataFrame:
         """
